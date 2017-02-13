@@ -1,9 +1,6 @@
 html, body {
 	background-color: #282828;
 	font-family: 'Padauk', 'Arial', sans-serif;
-}
-
-header {
 	background-image: -webkit-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/assets/images/market1.jpeg');
 	background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/assets/images/market1.jpeg');
 	background-size: cover;
@@ -11,6 +8,6 @@ header {
 	height: 100vh;
 }
 
-header h1 {
+.greeting {
 	color: #ffffff;
 }
