@@ -236,7 +236,13 @@ define('farmers-market-finder/router', ['exports', 'ember', 'farmers-market-find
   exports['default'] = Router;
 });
 define('farmers-market-finder/routes/search', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({});
+	exports['default'] = _ember['default'].Route.extend({
+		actions: {
+			search: function search() {
+				alert('search works');
+			}
+		}
+	});
 });
 define('farmers-market-finder/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _emberAjaxServicesAjax) {
   Object.defineProperty(exports, 'default', {
