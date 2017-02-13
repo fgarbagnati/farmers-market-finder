@@ -282,7 +282,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+45cb42af"});
+  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+092c2881"});
 }
 
 /* jshint ignore:end */
