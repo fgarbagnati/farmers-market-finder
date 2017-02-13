@@ -47,6 +47,15 @@ define('farmers-market-finder/initializers/app-version', ['exports', 'ember-cli-
     initialize: (0, _emberCliAppVersionInitializerFactory['default'])(name, version)
   };
 });
+define('farmers-market-finder/initializers/browser/ember-cli-webfontloader', ['exports', 'ember', 'farmers-market-finder/config/environment', 'ember-cli-webfontloader/initializers/browser/ember-cli-webfontloader'], function (exports, _ember, _farmersMarketFinderConfigEnvironment, _emberCliWebfontloaderInitializersBrowserEmberCliWebfontloader) {
+    exports['default'] = {
+        name: 'ember-cli-webfontloader',
+        initialize: function initialize() {
+            var config = _ember['default'].get(_farmersMarketFinderConfigEnvironment['default'], 'webFontConfig') || {};
+            (0, _emberCliWebfontloaderInitializersBrowserEmberCliWebfontloader['default'])(config);
+        }
+    };
+});
 define('farmers-market-finder/initializers/container-debug-adapter', ['exports', 'ember-resolver/container-debug-adapter'], function (exports, _emberResolverContainerDebugAdapter) {
   exports['default'] = {
     name: 'container-debug-adapter',
@@ -271,7 +280,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+c4435af5"});
+  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+45cb42af"});
 }
 
 /* jshint ignore:end */
