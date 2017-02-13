@@ -229,7 +229,9 @@ define('farmers-market-finder/router', ['exports', 'ember', 'farmers-market-find
     rootURL: _farmersMarketFinderConfigEnvironment['default'].rootURL
   });
 
-  Router.map(function () {});
+  Router.map(function () {
+    this.route('search');
+  });
 
   exports['default'] = Router;
 });
@@ -242,7 +244,7 @@ define('farmers-market-finder/services/ajax', ['exports', 'ember-ajax/services/a
   });
 });
 define("farmers-market-finder/templates/index", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template({ "id": "sIacKvP+", "block": "{\"statements\":[[\"open-element\",\"header\",[]],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"container\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"h1\",[]],[\"flush-element\"],[\"text\",\"Hi\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/index.hbs" } });
+  exports["default"] = Ember.HTMLBars.template({ "id": "kK+tnvSp", "block": "{\"statements\":[[\"open-element\",\"header\",[]],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"container\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"greeting\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"h1\",[]],[\"flush-element\"],[\"text\",\"Find a nearby farmer's market\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"block\",[\"link-to\"],[\"search\"],[[\"class\"],[\"btn btn-success\"]],0],[\"text\",\"\\n\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[{\"statements\":[[\"text\",\"Lettuce get started!\"]],\"locals\":[]}],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/index.hbs" } });
 });
 /* jshint ignore:start */
 
