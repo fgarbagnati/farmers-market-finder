@@ -1,1 +1,14 @@
-{{outlet}}
+<div class="row">
+	<div class="col-md-4">
+		<div class="greeting">
+			<form id="search" class="form-inline">
+				<div class="form-group">
+					{{input type="text" class="form-control input-lg" value=zipCode placeholder="Enter your zipcode"}}
+				</div>
+				<button {{action 'search'}} class="btn btn-lg btn-success">Search</button>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-8">
+	</div>
+</div>
