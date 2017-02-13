@@ -242,7 +242,7 @@ define('farmers-market-finder/services/ajax', ['exports', 'ember-ajax/services/a
   });
 });
 define("farmers-market-finder/templates/index", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template({ "id": "AEpuFX+s", "block": "{\"statements\":[[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"container\"],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"h1\",[]],[\"flush-element\"],[\"text\",\"Hi\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/index.hbs" } });
+  exports["default"] = Ember.HTMLBars.template({ "id": "sIacKvP+", "block": "{\"statements\":[[\"open-element\",\"header\",[]],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"container\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"h1\",[]],[\"flush-element\"],[\"text\",\"Hi\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/index.hbs" } });
 });
 /* jshint ignore:start */
 
