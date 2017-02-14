@@ -56,7 +56,17 @@ define('farmers-market-finder/controllers/search', ['exports', 'ember'], functio
 	exports['default'] = _ember['default'].Controller.extend({
 		actions: {
 			search: function search() {
-				alert(this.get('zipCode'));
+				$.ajax({
+					url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + this.get('zipCode'),
+					dataType: 'json',
+					cache: false,
+					success: (function (data) {
+						console.log(data);
+					}).bind(this),
+					error: (function (xhr, status, err) {
+						alert(err);
+					}).bind(this)
+				});
 			}
 		}
 	});
