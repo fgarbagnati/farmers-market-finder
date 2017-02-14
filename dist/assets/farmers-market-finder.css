@@ -22,6 +22,28 @@ html, body {
 #search {
 	width: 100%;
 	position: absolute;
-	-webkit-transform: translate(0%, 100%);
-	transform: translate(0%, 100%);
+	-webkit-transform: translate(0%, 85%);
+	transform: translate(0%, 85%);
+}
+
+#search h3 {
+	margin-bottom: 15px;
+	border-bottom: 1px solid #fafafa;
+}
+
+#search h3 i {
+	padding-right: 5px;
+}
+
+#search p {
+	margin-bottom: 30px;
+	font-size: 1.2em;
+}
+
+#map {
+	height: 80vh;
+	width: 85%;
+	position: absolute;
+	-webkit-transform: translate(10%, 15%);
+	transform: translate(10%, 15%);
 }

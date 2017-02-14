@@ -22,6 +22,36 @@ define('farmers-market-finder/app', ['exports', 'ember', 'farmers-market-finder/
 
   exports['default'] = App;
 });
+define('farmers-market-finder/components/google-map', ['exports', 'ember'], function (exports, _ember) {
+	exports['default'] = _ember['default'].Component.extend({
+		insertMap: (function () {
+			var container = this.$('#map')[0];
+			var options = {
+				center: new window.google.maps.LatLng(this.get('latitude'), this.get('longitude')),
+				zoom: 4,
+				styles: [{
+					"featureType": "landscape", "stylers": [{ "hue": "#FFA800" }, { "saturation": 0 }, { "lightness": 0 }, { "gamma": 1 }]
+				}, {
+					"featureType": "road.highway",
+					"stylers": [{ "hue": "#53FF00" }, { "saturation": -73 }, { "lightness": 40 }, { "gamma": 1 }]
+				}, {
+					"featureType": "road.arterial",
+					"stylers": [{ "hue": "#FBFF00" }, { "saturation": 0 }, { "lightness": 0 }, { "gamma": 1 }]
+				}, {
+					"featureType": "road.local",
+					"stylers": [{ "hue": "#00FFFD" }, { "saturation": 0 }, { "lightness": 30 }, { "gamma": 1 }]
+				}, {
+					"featureType": "water",
+					"stylers": [{ "hue": "#00BFFF" }, { "saturation": 6 }, { "lightness": 8 }, { "gamma": 1 }]
+				}, {
+					"featureType": "poi",
+					"stylers": [{ "hue": "#679714" }, { "saturation": 33.4 }, { "lightness": -25.4 }, { "gamma": 1 }]
+				}]
+			};
+			new window.google.maps.Map(container, options);
+		}).on('didInsertElement')
+	});
+});
 define('farmers-market-finder/helpers/app-version', ['exports', 'ember', 'farmers-market-finder/config/environment'], function (exports, _ember, _farmersMarketFinderConfigEnvironment) {
   exports.appVersion = appVersion;
   var version = _farmersMarketFinderConfigEnvironment['default'].APP.version;
@@ -255,11 +285,14 @@ define('farmers-market-finder/services/ajax', ['exports', 'ember-ajax/services/a
 define("farmers-market-finder/templates/application", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template({ "id": "am4phim8", "block": "{\"statements\":[[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"container\"],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"row\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"col-md-12\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"append\",[\"unknown\",[\"outlet\"]],false],[\"text\",\"\\n\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/application.hbs" } });
 });
+define("farmers-market-finder/templates/components/google-map", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template({ "id": "LJqq0a1Y", "block": "{\"statements\":[[\"open-element\",\"div\",[]],[\"static-attr\",\"id\",\"map\"],[\"flush-element\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/components/google-map.hbs" } });
+});
 define("farmers-market-finder/templates/index", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template({ "id": "lQF+PpTu", "block": "{\"statements\":[[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"row\"],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"col-md-12\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"greeting\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"h1\",[]],[\"flush-element\"],[\"text\",\"Find a nearby farmer's market\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"block\",[\"link-to\"],[\"search\"],[[\"class\"],[\"btn btn-lg btn-success\"]],0],[\"text\",\"\\n\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[{\"statements\":[[\"text\",\"Lettuce get started!\"]],\"locals\":[]}],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/index.hbs" } });
 });
 define("farmers-market-finder/templates/search", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template({ "id": "tcImMiGL", "block": "{\"statements\":[[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"row\"],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"col-md-4\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"form\",[]],[\"static-attr\",\"id\",\"search\"],[\"static-attr\",\"class\",\"form-inline\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"h3\",[]],[\"flush-element\"],[\"text\",\"Nothing beets locally grown! Use the search bar to find your nearby FarMar's!\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"form-group\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\\t\"],[\"append\",[\"helper\",[\"input\"],null,[[\"type\",\"class\",\"value\",\"placeholder\"],[\"text\",\"form-control input-lg\",[\"get\",[\"zipCode\"]],\"Enter your zipcode\"]]],false],[\"text\",\"\\n\\t\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"button\",[]],[\"static-attr\",\"class\",\"btn btn-lg btn-success\"],[\"modifier\",[\"action\"],[[\"get\",[null]],\"search\"]],[\"flush-element\"],[\"text\",\"Search\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"col-md-8\"],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/search.hbs" } });
+  exports["default"] = Ember.HTMLBars.template({ "id": "uJ5XopJD", "block": "{\"statements\":[[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"row\"],[\"flush-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"col-md-4\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"open-element\",\"form\",[]],[\"static-attr\",\"id\",\"search\"],[\"static-attr\",\"class\",\"form-inline\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"h3\",[]],[\"flush-element\"],[\"open-element\",\"i\",[]],[\"static-attr\",\"class\",\"ion-leaf\"],[\"flush-element\"],[\"close-element\"],[\"text\",\"Nothing beets locally grown!\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"p\",[]],[\"flush-element\"],[\"text\",\"Use the search bar to find your nearby FarMar's!\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"form-group\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\\t\\t\"],[\"append\",[\"helper\",[\"input\"],null,[[\"type\",\"class\",\"value\",\"placeholder\"],[\"text\",\"form-control input-lg\",[\"get\",[\"zipCode\"]],\"Enter your zipcode\"]]],false],[\"text\",\"\\n\\t\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\\t\"],[\"open-element\",\"button\",[]],[\"static-attr\",\"class\",\"btn btn-lg btn-success\"],[\"modifier\",[\"action\"],[[\"get\",[null]],\"search\"]],[\"flush-element\"],[\"text\",\"Search\"],[\"close-element\"],[\"text\",\"\\n\\t\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\\t\"],[\"open-element\",\"div\",[]],[\"static-attr\",\"class\",\"col-md-8\"],[\"flush-element\"],[\"text\",\"\\n\\t\\t\"],[\"append\",[\"helper\",[\"google-map\"],null,[[\"latitude\",\"longitude\"],[\"37.09024\",\"-95.712891\"]]],false],[\"text\",\"\\n\\t\"],[\"close-element\"],[\"text\",\"\\n\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}", "meta": { "moduleName": "farmers-market-finder/templates/search.hbs" } });
 });
 /* jshint ignore:start */
 
@@ -297,7 +330,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+092c2881"});
+  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+b404c8d9"});
 }
 
 /* jshint ignore:end */
