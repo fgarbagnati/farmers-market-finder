@@ -31,6 +31,10 @@ html, body {
 	border-bottom: 1px solid #fafafa;
 }
 
+#search h3 i {
+	padding-right: 5px;
+}
+
 #search p {
 	margin-bottom: 30px;
 	font-size: 1.2em;
