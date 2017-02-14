@@ -55,6 +55,7 @@ define('farmers-market-finder/components/google-map', ['exports', 'ember'], func
 define("farmers-market-finder/controllers/search", ["exports", "ember"], function (exports, _ember) {
 	exports["default"] = _ember["default"].Controller.extend({
 		baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
+		bounds: new google.maps.LatLngBounds(),
 		actions: {
 			search: function search() {
 				$.ajax({
@@ -117,11 +118,13 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 		},
 		placeMarkerOnMap: function placeMarkerOnMap(market) {
 			var position = new google.maps.LatLng(market.latLng[0], market.latLng[1]);
+			this.bounds.extend(position);
 			var marker = new google.maps.Marker({
 				position: position,
 				map: window.map,
 				title: market.name
 			});
+			window.map.fitBounds(this.bounds);
 		}
 	});
 });

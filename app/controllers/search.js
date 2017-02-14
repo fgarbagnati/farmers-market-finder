@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 	baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
+	bounds: new google.maps.LatLngBounds(),
 	actions: {
 		search: function() {
 			$.ajax({
@@ -64,10 +65,12 @@ export default Ember.Controller.extend({
 	}, 
 	placeMarkerOnMap: function(market) {
 		var position = new google.maps.LatLng(market.latLng[0], market.latLng[1]);
+		this.bounds.extend(position);
 		var marker = new google.maps.Marker({
 			position: position,
 			map: window.map,
 			title: market.name
 		});
+		window.map.fitBounds(this.bounds);
 	}
 });
