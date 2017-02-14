@@ -52,6 +52,15 @@ define('farmers-market-finder/components/google-map', ['exports', 'ember'], func
 		}).on('didInsertElement')
 	});
 });
+define('farmers-market-finder/controllers/search', ['exports', 'ember'], function (exports, _ember) {
+	exports['default'] = _ember['default'].Controller.extend({
+		actions: {
+			search: function search() {
+				alert(this.get('zipCode'));
+			}
+		}
+	});
+});
 define('farmers-market-finder/helpers/app-version', ['exports', 'ember', 'farmers-market-finder/config/environment'], function (exports, _ember, _farmersMarketFinderConfigEnvironment) {
   exports.appVersion = appVersion;
   var version = _farmersMarketFinderConfigEnvironment['default'].APP.version;
@@ -266,13 +275,7 @@ define('farmers-market-finder/router', ['exports', 'ember', 'farmers-market-find
   exports['default'] = Router;
 });
 define('farmers-market-finder/routes/search', ['exports', 'ember'], function (exports, _ember) {
-	exports['default'] = _ember['default'].Route.extend({
-		actions: {
-			search: function search() {
-				alert('search works');
-			}
-		}
-	});
+  exports['default'] = _ember['default'].Route.extend({});
 });
 define('farmers-market-finder/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _emberAjaxServicesAjax) {
   Object.defineProperty(exports, 'default', {

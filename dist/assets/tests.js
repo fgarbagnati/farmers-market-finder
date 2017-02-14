@@ -18,6 +18,15 @@ define('farmers-market-finder/tests/components/google-map.jshint.lint-test', ['e
     assert.ok(false, 'components/google-map.js should pass jshint.\ncomponents/google-map.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/google-map.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
   });
 });
+define('farmers-market-finder/tests/controllers/search.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | controllers/search.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'controllers/search.js should pass jshint.\ncontrollers/search.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncontrollers/search.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+  });
+});
 define('farmers-market-finder/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -192,6 +201,28 @@ define('farmers-market-finder/tests/test-helper.jshint.lint-test', ['exports'], 
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass jshint.');
+  });
+});
+define('farmers-market-finder/tests/unit/controllers/search-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:search', 'Unit | Controller | search', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('farmers-market-finder/tests/unit/controllers/search-test.jshint.lint-test', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | unit/controllers/search-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/search-test.js should pass jshint.');
   });
 });
 define('farmers-market-finder/tests/unit/routes/search-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
