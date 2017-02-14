@@ -48,8 +48,81 @@ define('farmers-market-finder/components/google-map', ['exports', 'ember'], func
 					"stylers": [{ "hue": "#679714" }, { "saturation": 33.4 }, { "lightness": -25.4 }, { "gamma": 1 }]
 				}]
 			};
-			new window.google.maps.Map(container, options);
+			window.map = new window.google.maps.Map(container, options);
 		}).on('didInsertElement')
+	});
+});
+define("farmers-market-finder/controllers/search", ["exports", "ember"], function (exports, _ember) {
+	exports["default"] = _ember["default"].Controller.extend({
+		baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
+		actions: {
+			search: function search() {
+				$.ajax({
+					url: this.baseUri + "/zipSearch?zip=" + this.get('zipCode'),
+					dataType: 'json',
+					cache: false,
+					success: (function (data) {
+						if (data.results[0].id == "Error") {
+							alert('Didn\'t find that zipcode. Please try again');
+							this.setProperties({ zipCode: '' });
+						} else {
+							this.sortData(data);
+						}
+					}).bind(this),
+					error: (function (xhr, status, err) {
+						alert(err);
+					}).bind(this)
+				});
+			}
+		},
+		sortData: function sortData(data) {
+			var len = data.results.length;
+			for (var i = 0; i < len; i++) {
+				this.lookUpById(data.results[i].id);
+			}
+		},
+		lookUpById: function lookUpById(id) {
+			return $.ajax({
+				url: this.baseUri + "/mktDetail?id=" + id,
+				dataType: 'json',
+				cache: false,
+				success: (function (data) {
+					var market = {
+						key: id,
+						name: this.getNameFromGoogleMapsLink(data.marketdetails.GoogleLink),
+						address: data.marketdetails.Address,
+						products: data.marketdetails.Products,
+						schedule: data.marketdetails.Schedule,
+						gmap: data.marketdetails.GoogleLink,
+						latLng: this.getLatLngFromGoogleMapsLink(data.marketdetails.GoogleLink)
+					};
+					this.placeMarkerOnMap(market);
+				}).bind(this),
+				error: (function (xhr, status, err) {
+					alert(err);
+				}).bind(this)
+			});
+		},
+		getNameFromGoogleMapsLink: function getNameFromGoogleMapsLink(googleMapsLink) {
+			var x = googleMapsLink.split('?q=')[1].split('%20').pop();
+			x = decodeURI(x.replace(/^\(/, '').replace(/\)$/, '')).replace(/\+/g, ' ');
+
+			return x.substring(1, x.length - 1);
+		},
+		getLatLngFromGoogleMapsLink: function getLatLngFromGoogleMapsLink(googleMapsLink) {
+			var x = googleMapsLink.split('?q=')[1].split('%20');
+			x[0] = x[0].replace(/%2C$/, '');
+
+			return x.slice(0, -1).map(parseFloat);
+		},
+		placeMarkerOnMap: function placeMarkerOnMap(market) {
+			var position = new google.maps.LatLng(market.latLng[0], market.latLng[1]);
+			var marker = new google.maps.Marker({
+				position: position,
+				map: window.map,
+				title: market.name
+			});
+		}
 	});
 });
 define('farmers-market-finder/helpers/app-version', ['exports', 'ember', 'farmers-market-finder/config/environment'], function (exports, _ember, _farmersMarketFinderConfigEnvironment) {
@@ -266,13 +339,7 @@ define('farmers-market-finder/router', ['exports', 'ember', 'farmers-market-find
   exports['default'] = Router;
 });
 define('farmers-market-finder/routes/search', ['exports', 'ember'], function (exports, _ember) {
-	exports['default'] = _ember['default'].Route.extend({
-		actions: {
-			search: function search() {
-				alert('search works');
-			}
-		}
-	});
+  exports['default'] = _ember['default'].Route.extend({});
 });
 define('farmers-market-finder/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _emberAjaxServicesAjax) {
   Object.defineProperty(exports, 'default', {
@@ -330,7 +397,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+b404c8d9"});
+  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+0afab1b2"});
 }
 
 /* jshint ignore:end */
