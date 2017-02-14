@@ -56,8 +56,10 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 	exports["default"] = _ember["default"].Controller.extend({
 		baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
 		bounds: new google.maps.LatLngBounds(),
+		markers: [],
 		actions: {
 			search: function search() {
+				this.clearPreviousData();
 				$.ajax({
 					url: this.baseUri + "/zipSearch?zip=" + this.get('zipCode'),
 					dataType: 'json',
@@ -75,6 +77,11 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 					}).bind(this)
 				});
 			}
+		},
+		clearPreviousData: function clearPreviousData() {
+			var bounds = new google.maps.LatLngBounds();
+			this.bounds = bounds;
+			this.deleteMarkers();
 		},
 		sortData: function sortData(data) {
 			var len = data.results.length;
@@ -124,7 +131,14 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 				map: window.map,
 				title: market.name
 			});
+			this.markers.push(marker);
 			window.map.fitBounds(this.bounds);
+		},
+		deleteMarkers: function deleteMarkers() {
+			for (var i = 0; i < this.markers.length; i++) {
+				this.markers[i].setMap(null);
+			}
+			this.markers = [];
 		}
 	});
 });

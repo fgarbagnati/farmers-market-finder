@@ -3,8 +3,10 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 	baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
 	bounds: new google.maps.LatLngBounds(),
+	markers: [],
 	actions: {
 		search: function() {
+			this.clearPreviousData();
 			$.ajax({
 				url: this.baseUri + "/zipSearch?zip=" + this.get('zipCode'),
 				dataType: 'json',
@@ -22,6 +24,11 @@ export default Ember.Controller.extend({
 				}.bind(this)
 			});
 		}
+	},
+	clearPreviousData: function() {
+		var bounds = new google.maps.LatLngBounds();
+		this.bounds = bounds;
+		this.deleteMarkers();
 	},
 	sortData: function(data) {
 		var len = data.results.length;
@@ -71,6 +78,13 @@ export default Ember.Controller.extend({
 			map: window.map,
 			title: market.name
 		});
+		this.markers.push(marker);
 		window.map.fitBounds(this.bounds);
+	},
+	deleteMarkers: function() {
+		for (var i = 0; i < this.markers.length; i++) {
+			this.markers[i].setMap(null);
+		}
+		this.markers = [];
 	}
 });
