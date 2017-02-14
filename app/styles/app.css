@@ -39,3 +39,11 @@ html, body {
 	margin-bottom: 30px;
 	font-size: 1.2em;
 }
+
+#map {
+	height: 80vh;
+	width: 85%;
+	position: absolute;
+	-webkit-transform: translate(10%, 15%);
+	transform: translate(10%, 15%);
+}
