@@ -124,6 +124,11 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 			return x.slice(0, -1).map(parseFloat);
 		},
 		placeMarkerOnMap: function placeMarkerOnMap(market) {
+			var contentString = '<div class="info-window"><h1>' + market.name + '</h1><p><strong>Address: </strong>' + market.address + '</p><p><strong>Schedule: </strong>' + market.schedule + '</p><p><strong>Products: </strong>' + market.products + '</p></div>';
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+
 			var position = new google.maps.LatLng(market.latLng[0], market.latLng[1]);
 			this.bounds.extend(position);
 			var marker = new google.maps.Marker({
@@ -131,6 +136,9 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 				map: window.map,
 				title: market.name,
 				icon: 'assets/images/turnip.png'
+			});
+			marker.addListener('click', function () {
+				infowindow.open(window.map, marker);
 			});
 			this.markers.push(marker);
 			window.map.fitBounds(this.bounds);
