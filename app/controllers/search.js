@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+	baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
 	actions: {
 		search: function() {
 			$.ajax({
-				url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + this.get('zipCode'),
+				url: this.baseUri + "/zipSearch?zip=" + this.get('zipCode'),
 				dataType: 'json',
 				cache: false,
 				success: function(data) {
@@ -29,7 +30,7 @@ export default Ember.Controller.extend({
 	},
 	lookUpById: function(id) {
 		return $.ajax({
-			url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + id,
+			url: this.baseUri + "/mktDetail?id=" + id,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {

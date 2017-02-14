@@ -52,12 +52,13 @@ define('farmers-market-finder/components/google-map', ['exports', 'ember'], func
 		}).on('didInsertElement')
 	});
 });
-define('farmers-market-finder/controllers/search', ['exports', 'ember'], function (exports, _ember) {
-	exports['default'] = _ember['default'].Controller.extend({
+define("farmers-market-finder/controllers/search", ["exports", "ember"], function (exports, _ember) {
+	exports["default"] = _ember["default"].Controller.extend({
+		baseUri: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc",
 		actions: {
 			search: function search() {
 				$.ajax({
-					url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + this.get('zipCode'),
+					url: this.baseUri + "/zipSearch?zip=" + this.get('zipCode'),
 					dataType: 'json',
 					cache: false,
 					success: (function (data) {
@@ -82,7 +83,7 @@ define('farmers-market-finder/controllers/search', ['exports', 'ember'], functio
 		},
 		lookUpById: function lookUpById(id) {
 			return $.ajax({
-				url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + id,
+				url: this.baseUri + "/mktDetail?id=" + id,
 				dataType: 'json',
 				cache: false,
 				success: (function (data) {
