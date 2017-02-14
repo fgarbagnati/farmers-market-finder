@@ -48,7 +48,7 @@ define('farmers-market-finder/components/google-map', ['exports', 'ember'], func
 					"stylers": [{ "hue": "#679714" }, { "saturation": 33.4 }, { "lightness": -25.4 }, { "gamma": 1 }]
 				}]
 			};
-			new window.google.maps.Map(container, options);
+			window.map = new window.google.maps.Map(container, options);
 		}).on('didInsertElement')
 	});
 });
@@ -96,7 +96,7 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 						gmap: data.marketdetails.GoogleLink,
 						latLng: this.getLatLngFromGoogleMapsLink(data.marketdetails.GoogleLink)
 					};
-					console.log(market);
+					this.placeMarkerOnMap(market);
 				}).bind(this),
 				error: (function (xhr, status, err) {
 					alert(err);
@@ -114,6 +114,14 @@ define("farmers-market-finder/controllers/search", ["exports", "ember"], functio
 			x[0] = x[0].replace(/%2C$/, '');
 
 			return x.slice(0, -1).map(parseFloat);
+		},
+		placeMarkerOnMap: function placeMarkerOnMap(market) {
+			var position = new google.maps.LatLng(market.latLng[0], market.latLng[1]);
+			var marker = new google.maps.Marker({
+				position: position,
+				map: window.map,
+				title: market.name
+			});
 		}
 	});
 });

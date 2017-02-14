@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
 					gmap: data.marketdetails.GoogleLink,
 					latLng: this.getLatLngFromGoogleMapsLink(data.marketdetails.GoogleLink)
 				};
-				console.log(market);
+				this.placeMarkerOnMap(market);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				alert(err);
@@ -61,5 +61,13 @@ export default Ember.Controller.extend({
 		x[0] = x[0].replace(/%2C$/,'');
 		
 		return x.slice(0, -1).map(parseFloat);
+	}, 
+	placeMarkerOnMap: function(market) {
+		var position = new google.maps.LatLng(market.latLng[0], market.latLng[1]);
+		var marker = new google.maps.Marker({
+			position: position,
+			map: window.map,
+			title: market.name
+		});
 	}
 });

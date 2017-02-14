@@ -65,6 +65,6 @@ export default Ember.Component.extend({
 				}
 			]
 		};
-		new window.google.maps.Map(container, options);
+		window.map = new window.google.maps.Map(container, options);
 	}.on('didInsertElement')
 });
