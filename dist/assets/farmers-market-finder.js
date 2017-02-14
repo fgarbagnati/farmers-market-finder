@@ -65,8 +65,37 @@ define('farmers-market-finder/controllers/search', ['exports', 'ember'], functio
 							alert('Didn\'t find that zipcode. Please try again');
 							this.setProperties({ zipCode: '' });
 						} else {
-							console.log(data);
+							this._actions.sortData(data);
 						}
+					}).bind(this),
+					error: (function (xhr, status, err) {
+						alert(err);
+					}).bind(this)
+				});
+			},
+			sortData: function sortData(data) {
+				console.log('sorting');
+				var len = data.results.length;
+				for (var i = 0; i < len; i++) {
+					this.lookUpById(data.results[i].id);
+				}
+				console.log(this.farMars);
+			},
+			lookUpById: function lookUpById(id) {
+				console.log('lookUpById');
+				return $.ajax({
+					url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + id,
+					dataType: 'json',
+					cache: false,
+					success: (function (data) {
+						var market = {
+							key: id,
+							address: data.marketdetails.Address,
+							products: data.marketdetails.Products,
+							schedule: data.marketdetails.Schedule,
+							gmap: data.marketdetails.GoogleLink
+						};
+						console.log(market);
 					}).bind(this),
 					error: (function (xhr, status, err) {
 						alert(err);
@@ -348,7 +377,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+b404c8d9"});
+  require("farmers-market-finder/app")["default"].create({"name":"farmers-market-finder","version":"0.0.0+0afab1b2"});
 }
 
 /* jshint ignore:end */
