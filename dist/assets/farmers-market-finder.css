@@ -47,3 +47,7 @@ html, body {
 	-webkit-transform: translate(10%, 15%);
 	transform: translate(10%, 15%);
 }
+
+.info-window {
+	color: #282828;
+}
