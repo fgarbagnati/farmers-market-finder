@@ -1,13 +1,12 @@
 <div class="row">
 	<div class="col-md-4">
-		<div class="greeting">
-			<form id="search" class="form-inline">
-				<div class="form-group">
-					{{input type="text" class="form-control input-lg" value=zipCode placeholder="Enter your zipcode"}}
-				</div>
-				<button {{action 'search'}} class="btn btn-lg btn-success">Search</button>
-			</form>
-		</div>
+		<form id="search" class="form-inline">
+			<h3>Nothing beets locally grown! Use the search bar to find your nearby FarMar's!</h3>
+			<div class="form-group">
+				{{input type="text" class="form-control input-lg" value=zipCode placeholder="Enter your zipcode"}}
+			</div>
+			<button {{action 'search'}} class="btn btn-lg btn-success">Search</button>
+		</form>
 	</div>
 	<div class="col-md-8">
 	</div>

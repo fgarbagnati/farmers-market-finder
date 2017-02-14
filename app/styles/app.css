@@ -18,3 +18,10 @@ html, body {
 .greeting h1 {
 	font-size: 5em;
 }
+
+#search {
+	width: 100%;
+	position: absolute;
+	-webkit-transform: translate(0%, 100%);
+	transform: translate(0%, 100%);
+}
