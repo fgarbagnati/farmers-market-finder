@@ -76,7 +76,8 @@ export default Ember.Controller.extend({
 		var marker = new google.maps.Marker({
 			position: position,
 			map: window.map,
-			title: market.name
+			title: market.name,
+			icon: 'assets/images/turnip.png'
 		});
 		this.markers.push(marker);
 		window.map.fitBounds(this.bounds);
