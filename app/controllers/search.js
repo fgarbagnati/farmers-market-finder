@@ -8,7 +8,12 @@ export default Ember.Controller.extend({
 				dataType: 'json',
 				cache: false,
 				success: function(data) {
-					console.log(data);
+					if(data.results[0].id == "Error") {
+						alert('Didn\'t find that zipcode. Please try again');
+						this.setProperties({zipCode: ''});
+					} else {
+						console.log(data);
+					}
 				}.bind(this),
 				error: function(xhr, status, err) {
 					alert(err);
